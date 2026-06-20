@@ -4,10 +4,10 @@
 | Field | Value |
 |-------|-------|
 | **Status** | `DRAFT v0.1` |
-| **Author** | Hermes Agent O / AIToolInsider |
+| **Author** | Mike Oller |
 | **Date** | 2026-06-19 |
 | **License** | Apache 2.0 |
-| **Repository** | `github.com/aitoolinsider/json-tl-spec` (planned) |
+| **Repository** | `github.com/mikeoller82/json-tl-spec` (planned) |
 
 ---
 
