@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "https://raw.githubusercontent.com/aitoolinsider/json-tl-spec/v0.1/schema.json",
+  "id": "https://raw.githubusercontent.com/mikeoller82/json-tl-spec/v0.1/schema.json",
   "title": "JSON-TL Trace Envelope",
   "description": "Open standard for AI agent execution tracing. Analogous to OpenTelemetry for AI agents.",
   "type": "object",
