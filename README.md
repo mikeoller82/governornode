@@ -31,12 +31,20 @@ User Input → Agent (ReAct/Reflexion) → Observation → Router
 ![Architecture](governornode-architecture.drawio.png)
 
 ## Quick Start
-
 ```bash
-pip install langgraph langchain-openai pyyaml
-cd governornode-mvp
-python examples/basic_usage.py
+pip install governornode
+# or with YAML config support:
+pip install "governornode[yaml]"
 ```
+
+```python
+from governornode import GovernorNode, GovernancePolicy
+
+policy = GovernancePolicy(max_iterations=10)
+governor = GovernorNode(node=my_agent_fn, name="reasoner", policy=policy)
+```
+
+See [`examples/`](examples/) for full working demos.
 
 ## Usage
 
@@ -70,18 +78,17 @@ halt_on_violation: true
 ```
 
 ### Flight Recorder
-
 Every run writes a `flight_recorder.json` — a complete audit trail of agent decisions:
 
 ```bash
 # Convert to JSON-TL format
-python json_tl.py convert flight_recorder.json -o trace.jsonl
+json-tl convert flight_recorder.json -o trace.jsonl
 
 # Validate a trace
-python json_tl.py validate trace.jsonl
+json-tl validate trace.jsonl
 
 # Show trace info
-python json_tl.py info trace.jsonl
+json-tl info trace.jsonl
 ```
 
 ## JSON-TL Schema
@@ -90,7 +97,7 @@ The JSON-TL (JSON Trace Language) schema defines an interoperable format for AI 
 
 - **RFC:** [json-tl-rfc.md](json-tl-rfc.md)
 - **Schema:** [json-tl-schema.json](json-tl-schema.json)
-- **Reference impl:** [json_tl.py](json_tl.py)
+- **Reference impl:** [governornode/json_tl.py](governornode/json_tl.py)
 
 ## Project Structure
 
@@ -103,7 +110,8 @@ governornode-mvp/
 │   ├── oscillation.py      # State oscillation detector
 │   ├── policies.py         # Halt policies
 │   ├── config.py           # YAML config loader
-│   └── flight_recorder.py  # JSONL audit trail
+│   ├── flight_recorder.py  # JSONL audit trail
+│   └── json_tl.py          # JSON-TL CLI (validate/convert/info)
 ├── examples/
 │   ├── governance.yaml     # Sample config
 │   ├── basic_usage.py      # Minimal example
@@ -113,14 +121,14 @@ governornode-mvp/
 ├── tests/
 │   ├── test_governor.py    # 23 tests — governor + entropy + oscillation
 │   └── test_json_tl.py     # 35 tests — schema validation + conversion
-├── json_tl.py              # JSON-TL CLI (validate/convert/info)
 ├── json-tl-rfc.md          # JSON-TL RFC DRAFT v0.1
 ├── json-tl-schema.json     # JSON Schema (draft-04)
 ├── governornode-architecture.drawio  # Architecture diagram source
 ├── governornode-architecture.drawio.png
 ├── governornode-architecture.drawio.svg
 ├── SPEC.md                 # Full specification
-└── setup.py
+├── pyproject.toml          # Package config
+└── README.md
 ```
 
 ## Tests
@@ -133,7 +141,7 @@ pytest tests/ -v
 ## Roadmap
 
 - [ ] Git init + CI/CD
-- [ ] `pyproject.toml` for PyPI packaging
+- [x] `pyproject.toml` for PyPI packaging
 - [ ] LangGraph native integration (PR)
 - [ ] Multi-agent governor federation
 - [ ] Real-time entropy dashboard

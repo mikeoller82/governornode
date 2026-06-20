@@ -14,9 +14,7 @@ import sys
 import tempfile
 import uuid
 
-# Ensure the parent directory is importable
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-from json_tl import (
+from governornode.json_tl import (
     validate_trace,
     convert_flight_records,
     VALID_SPAN_TYPES,
