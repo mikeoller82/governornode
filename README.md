@@ -1,4 +1,4 @@
-# GovernorNode MVP
+# GovernorNode 
 
 **System 2 governance wrapper for LangGraph.**
 
