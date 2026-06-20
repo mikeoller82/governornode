@@ -1,0 +1,182 @@
+{
+  "json_tl_version": "0.1.0",
+  "trace_id": "019529b0-1000-7e00-a000-000000000101",
+  "agent_id": "governornode-re-act-v1",
+  "agent_version": "abc123def456",
+  "session_id": "019529b0-2000-7e00-a000-000000000102",
+  "parent_trace_id": null,
+  "policy_snapshot": {
+    "max_iterations": 10,
+    "max_oscillations": 3,
+    "entropy_window": 10,
+    "entropy_threshold": 0.1,
+    "record_io": true,
+    "halt_on_violation": true
+  },
+  "events": [
+    {
+      "event_id": "019529b0-3001-7e00-a000-000000000001",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "reasoning_step_1",
+      "timestamp": "2026-06-19T14:30:00.000Z",
+      "duration_ms": 150.2,
+      "iteration": 1,
+      "cumulative_iterations": 1,
+      "entropy": null,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "messages": [
+          {"role": "user", "content": "Find AI governance trends for 2027"}
+        ],
+        "step": 0
+      },
+      "output_snapshot": {
+        "messages": [
+          {"role": "user", "content": "Find AI governance trends for 2027"},
+          {"role": "assistant", "content": "Thought: I need to search for recent AI governance developments."}
+        ],
+        "step": 1,
+        "tool_calls": 0
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {
+        "model": "claude-sonnet-4",
+        "temperature": 0.0,
+        "token_count": 145
+      }
+    },
+    {
+      "event_id": "019529b0-3002-7e00-a000-000000000002",
+      "parent_event_id": "019529b0-3001-7e00-a000-000000000001",
+      "span_type": "tool",
+      "span_name": "web_search",
+      "timestamp": "2026-06-19T14:30:00.150Z",
+      "duration_ms": 320.5,
+      "iteration": 1,
+      "cumulative_iterations": 1,
+      "entropy": null,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "query": "AI governance trends 2027"
+      },
+      "output_snapshot": {
+        "results_count": 5,
+        "top_result": "EU AI Act amendments proposed for 2027 enforcement"
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {
+        "search_provider": "tavily",
+        "query_time_ms": 310
+      }
+    },
+    {
+      "event_id": "019529b0-3003-7e00-a000-000000000003",
+      "parent_event_id": "019529b0-3001-7e00-a000-000000000001",
+      "span_type": "observation",
+      "span_name": "search_results_observation",
+      "timestamp": "2026-06-19T14:30:00.475Z",
+      "duration_ms": 0.5,
+      "iteration": 1,
+      "cumulative_iterations": 1,
+      "entropy": null,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": null,
+      "output_snapshot": {
+        "observation": "Found 5 sources. EU AI Act amendments, CISA guidelines, industry self-regulation frameworks."
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {}
+    },
+    {
+      "event_id": "019529b0-3004-7e00-a000-000000000004",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "reasoning_step_2",
+      "timestamp": "2026-06-19T14:30:00.480Z",
+      "duration_ms": 200.1,
+      "iteration": 2,
+      "cumulative_iterations": 2,
+      "entropy": 1.0,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "messages": ["...previous messages..."],
+        "step": 1
+      },
+      "output_snapshot": {
+        "messages": ["...messages with analysis..."],
+        "step": 2,
+        "tool_calls": 1
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {
+        "model": "claude-sonnet-4",
+        "temperature": 0.0,
+        "token_count": 320
+      }
+    },
+    {
+      "event_id": "019529b0-3005-7e00-a000-000000000005",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "reasoning_step_3",
+      "timestamp": "2026-06-19T14:30:00.685Z",
+      "duration_ms": 180.3,
+      "iteration": 3,
+      "cumulative_iterations": 3,
+      "entropy": 1.58,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "messages": ["...previous messages..."],
+        "step": 2
+      },
+      "output_snapshot": {
+        "messages": ["...final answer..."],
+        "step": 3,
+        "tool_calls": 1
+      },
+      "error": null,
+      "metadata": {
+        "model": "claude-sonnet-4",
+        "temperature": 0.0,
+        "token_count": 210
+      }
+    },
+    {
+      "event_id": "019529b0-3006-7e00-a000-000000000006",
+      "parent_event_id": null,
+      "span_type": "governor",
+      "span_name": "entropy_check",
+      "timestamp": "2026-06-19T14:30:01.000Z",
+      "duration_ms": 0.01,
+      "iteration": 4,
+      "cumulative_iterations": 4,
+      "entropy": 2.0,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": null,
+      "output_snapshot": null,
+      "error": null,
+      "metadata": {
+        "check_type": "post_execution_audit",
+        "entropy_threshold": 0.1,
+        "entropy_passed": true
+      }
+    }
+  ],
+  "metadata": {
+    "framework": "governornode-mvp",
+    "simulation_scenario": "standardized_orchestration",
+    "confidence": 0.75
+  },
+  "signature": null
+}

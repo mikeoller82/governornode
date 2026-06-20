@@ -1,0 +1,223 @@
+{
+  "json_tl_version": "0.1.0",
+  "trace_id": "09dfaf74-7867-4ec1-b862-0de26dc57520",
+  "session_id": "8e20349b-cea7-4e5d-9a46-86eb37b419e9",
+  "events": [
+    {
+      "event_id": "fda2b0b5-c89a-44e5-92d7-19e5d3ae3876",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "react_agent",
+      "timestamp": "2026-06-19T12:50:51.212Z",
+      "duration_ms": 10.194948999924236,
+      "iteration": 1,
+      "cumulative_iterations": 1,
+      "entropy": 0.0,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "step": 0,
+        "messages": [],
+        "tool_calls": 0
+      },
+      "output_snapshot": {
+        "step": 1,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]"
+        ],
+        "tool_calls": 1
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {}
+    },
+    {
+      "event_id": "3556a859-1362-4ee8-b02a-99ad85e11028",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "react_agent",
+      "timestamp": "2026-06-19T12:50:51.212Z",
+      "duration_ms": 0.08626899989394587,
+      "iteration": 2,
+      "cumulative_iterations": 2,
+      "entropy": 1.0,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "step": 1,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]"
+        ],
+        "tool_calls": 1
+      },
+      "output_snapshot": {
+        "step": 2,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]",
+          "Thought: Let me calculate the market size.",
+          "Action: calculator(expr='65 + 25 + 10')",
+          "Observation: Sum = 100"
+        ],
+        "tool_calls": 2
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {}
+    },
+    {
+      "event_id": "92aae586-d08c-45ab-8635-48f1b5ee520f",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "react_agent",
+      "timestamp": "2026-06-19T12:50:51.212Z",
+      "duration_ms": 0.009605000059309532,
+      "iteration": 3,
+      "cumulative_iterations": 3,
+      "entropy": 1.584962500721156,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "step": 2,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]",
+          "Thought: Let me calculate the market size.",
+          "Action: calculator(expr='65 + 25 + 10')",
+          "Observation: Sum = 100"
+        ],
+        "tool_calls": 2
+      },
+      "output_snapshot": {
+        "step": 3,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]",
+          "Thought: Let me calculate the market size.",
+          "Action: calculator(expr='65 + 25 + 10')",
+          "Observation: Sum = 100",
+          "Thought: I have enough information.",
+          "Answer: The simulation predicts 65% Standardized Orchestration, 25% Sovereign Audit, 10% Swarm."
+        ],
+        "tool_calls": 2
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {}
+    },
+    {
+      "event_id": "b6173ab4-99f5-44e0-8ed0-6a06ab2a2230",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "react_agent",
+      "timestamp": "2026-06-19T12:50:51.222Z",
+      "duration_ms": 10.234834999891973,
+      "iteration": 4,
+      "cumulative_iterations": 4,
+      "entropy": 2.0,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "step": 3,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]",
+          "Thought: Let me calculate the market size.",
+          "Action: calculator(expr='65 + 25 + 10')",
+          "Observation: Sum = 100",
+          "Thought: I have enough information.",
+          "Answer: The simulation predicts 65% Standardized Orchestration, 25% Sovereign Audit, 10% Swarm."
+        ],
+        "tool_calls": 2
+      },
+      "output_snapshot": {
+        "step": 4,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]",
+          "Thought: Let me calculate the market size.",
+          "Action: calculator(expr='65 + 25 + 10')",
+          "Observation: Sum = 100",
+          "Thought: I have enough information.",
+          "Answer: The simulation predicts 65% Standardized Orchestration, 25% Sovereign Audit, 10% Swarm.",
+          "Thought: Step 4 \u2014 still thinking...",
+          "Action: search(query='same query again')",
+          "Observation: Results for 'same query again': [doc1, doc2, doc3]"
+        ],
+        "tool_calls": 3
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {}
+    },
+    {
+      "event_id": "84b9ee24-5011-4959-8d38-c98ddf73f465",
+      "parent_event_id": null,
+      "span_type": "agent",
+      "span_name": "react_agent",
+      "timestamp": "2026-06-19T12:50:51.232Z",
+      "duration_ms": 10.170693000191022,
+      "iteration": 5,
+      "cumulative_iterations": 5,
+      "entropy": null,
+      "oscillation_detected": false,
+      "status": "ok",
+      "input_snapshot": {
+        "step": 4,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]",
+          "Thought: Let me calculate the market size.",
+          "Action: calculator(expr='65 + 25 + 10')",
+          "Observation: Sum = 100",
+          "Thought: I have enough information.",
+          "Answer: The simulation predicts 65% Standardized Orchestration, 25% Sovereign Audit, 10% Swarm.",
+          "Thought: Step 4 \u2014 still thinking...",
+          "Action: search(query='same query again')",
+          "Observation: Results for 'same query again': [doc1, doc2, doc3]"
+        ],
+        "tool_calls": 3
+      },
+      "output_snapshot": {
+        "step": 5,
+        "messages": [
+          "Thought: I need to find information about AI governance.",
+          "Action: search(query='AI governance frameworks 2026')",
+          "Observation: Results for 'AI governance frameworks 2026': [doc1, doc2, doc3]",
+          "Thought: Let me calculate the market size.",
+          "Action: calculator(expr='65 + 25 + 10')",
+          "Observation: Sum = 100",
+          "Thought: I have enough information.",
+          "Answer: The simulation predicts 65% Standardized Orchestration, 25% Sovereign Audit, 10% Swarm.",
+          "Thought: Step 4 \u2014 still thinking...",
+          "Action: search(query='same query again')",
+          "Observation: Results for 'same query again': [doc1, doc2, doc3]",
+          "Thought: Step 5 \u2014 still thinking...",
+          "Action: search(query='same query again')",
+          "Observation: Results for 'same query again': [doc1, doc2, doc3]"
+        ],
+        "tool_calls": 4
+      },
+      "error": null,
+      "policy_snapshot": null,
+      "metadata": {}
+    }
+  ],
+  "agent_id": "governornode-agent",
+  "metadata": {
+    "framework": "governornode-mvp",
+    "event_count": 5,
+    "converted_by": "json_tl.py",
+    "converted_at": "2026-06-19T12:59:08.000Z"
+  }
+}

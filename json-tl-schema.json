@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "https://raw.githubusercontent.com/aitoolinsider/json-tl-spec/v0.1/schema.json",
+  "title": "JSON-TL Trace Envelope",
+  "description": "Open standard for AI agent execution tracing. Analogous to OpenTelemetry for AI agents.",
+  "type": "object",
+  "required": [
+    "json_tl_version",
+    "trace_id",
+    "session_id",
+    "events"
+  ],
+  "properties": {
+    "json_tl_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9]+)?$",
+      "description": "Semver of the JSON-TL spec this payload conforms to"
+    },
+    "trace_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "UUID identifying the entire trace run. UUIDv7 recommended for temporal ordering."
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "Identifier for the agent executable or configuration"
+    },
+    "agent_version": {
+      "type": ["string", "null"],
+      "description": "Git SHA or semver of the agent code"
+    },
+    "session_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "UUID identifying this specific run session"
+    },
+    "parent_trace_id": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "Set when this is a sub-agent trace, linking to parent trace"
+    },
+    "policy_snapshot": {
+      "type": ["object", "null"],
+      "description": "Serialized governance policy active during this trace",
+      "properties": {
+        "max_iterations": { "type": "integer", "minimum": 1 },
+        "max_oscillations": { "type": "integer", "minimum": 0 },
+        "entropy_window": { "type": "integer", "minimum": 1 },
+        "entropy_threshold": { "type": "number", "minimum": 0 },
+        "record_io": { "type": "boolean" },
+        "halt_on_violation": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+    "events": {
+      "type": "array",
+      "minItems": 0,
+      "items": { "$ref": "#/definitions/TraceEvent" },
+      "description": "Ordered list of trace events"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Arbitrary key-value metadata for the envelope",
+      "additionalProperties": true
+    },
+    "signature": {
+      "type": ["string", "null"],
+      "description": "HMAC-SHA256 or JWS signature over the canonical payload"
+    }
+  },
+  "additionalProperties": true,
+  "definitions": {
+    "TraceEvent": {
+      "type": "object",
+      "required": [
+        "event_id",
+        "span_type",
+        "timestamp",
+        "iteration",
+        "status"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "event_id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "description": "UUIDv7 unique identifier for this event"
+        },
+        "parent_event_id": {
+          "type": ["string", "null"],
+          "description": "Links to the parent event for span hierarchy. null = root span."
+        },
+        "span_type": {
+          "type": "string",
+          "enum": ["agent", "tool", "llm", "observation", "router", "governor"],
+          "description": "Semantic category of this trace event"
+        },
+        "span_name": {
+          "type": "string",
+          "description": "Human-readable label (e.g., 'search_web', 'reasoning_step', 'iteration_limit')"
+        },
+        "timestamp": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$",
+          "description": "ISO 8601 UTC timestamp with millisecond precision"
+        },
+        "duration_ms": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Wall-clock duration of this span in milliseconds"
+        },
+        "iteration": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Iteration number of this node within the agent loop (1-indexed)"
+        },
+        "cumulative_iterations": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Total iterations across all nodes in the trace so far"
+        },
+        "entropy": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Plan entropy at this point. Shannon entropy over last N outputs. null if not computed."
+        },
+        "oscillation_detected": {
+          "type": "boolean",
+          "description": "True if this step was flagged as an oscillation repeat"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["ok", "error", "governor_halt", "timeout", "cancelled"],
+          "description": "Execution status of this event"
+        },
+        "input_snapshot": {
+          "type": ["object", "null"],
+          "description": "Full input state at event start. Omitted for size sensitivity.",
+          "additionalProperties": true
+        },
+        "output_snapshot": {
+          "type": ["object", "null"],
+          "description": "Full output state at event completion.",
+          "additionalProperties": true
+        },
+        "error": {
+          "oneOf": [
+            {"$ref": "#/definitions/ErrorObject"},
+            {"type": "null"}
+          ],
+          "description": "Present when status is 'error' or 'governor_halt'"
+        },
+        "policy_snapshot": {
+          "type": ["object", "null"],
+          "description": "Policy config at event time (overrides envelope-level if present)",
+          "additionalProperties": true
+        },
+        "metadata": {
+          "type": ["object", "null"],
+          "description": "Arbitrary extensibility key-value map",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "ErrorObject": {
+      "type": "object",
+      "required": ["type", "message"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Machine-readable error type (e.g., GovernorExceededError, ToolTimeoutError)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error description"
+        },
+        "code": {
+          "type": ["integer", "null"],
+          "description": "Error code for programmatic handling"
+        },
+        "stack": {
+          "type": ["string", "null"],
+          "description": "Stack trace or execution context"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

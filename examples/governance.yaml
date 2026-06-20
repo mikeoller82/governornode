@@ -1,0 +1,20 @@
+# Governance configuration for GovernorNode
+# This YAML file documents all available settings with defaults.
+
+# Maximum number of iterations per node before GovernorExceededError
+max_iterations: 10
+
+# Consecutive identical outputs before oscillation is flagged
+max_oscillations: 3
+
+# Rolling window size for plan entropy calculation
+entropy_window: 10
+
+# Minimum entropy threshold (below this = stuck behavior warning)
+entropy_threshold: 0.1
+
+# Capture full input/output snapshots in flight recorder
+record_io: true
+
+# If true, raise GovernorExceededError on violation; if false, log warning and pass through
+halt_on_violation: true
