@@ -140,7 +140,7 @@ pytest tests/ -v
 
 ## Roadmap
 
-- [ ] Git init + CI/CD
+- [x] Git init + CI/CD
 - [x] `pyproject.toml` for PyPI packaging
 - [ ] LangGraph native integration (PR)
 - [ ] Multi-agent governor federation
